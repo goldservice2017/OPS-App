@@ -1,0 +1,858 @@
+﻿<Page
+    x:Class="OPS.ProductPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OPS"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{StaticResource White}" Width="973.554">
+
+    <!--
+    <Page.Transitions>
+        <TransitionCollection>
+            <EntranceThemeTransition/>
+        </TransitionCollection>
+    </Page.Transitions>
+    -->
+    
+    <Grid Name="rootGrid"
+          Background="{StaticResource White}"
+          Width="Auto" Height="Auto">
+
+        <local:BackButton x:Name="homeButton"
+                          x:Uid="HomeButton"
+                          Margin="{x:Bind App.BackButtonMargin, Mode=TwoWay, FallbackValue=50}"
+                          VerticalAlignment="Top"
+                          HorizontalAlignment="Left"
+                          Tapped="GoHome"/>
+
+        <local:BackButton x:Name="whatsIncludedBtn"
+                          x:Uid="WhatsIncluded"
+                          VerticalAlignment="Bottom"
+                          HorizontalAlignment="Left"
+                          ImageRotation="90"
+                          Tapped="showAssetDetails"
+                          Margin="{x:Bind App.ProductWhatsIncludedMargin, Mode=TwoWay, FallbackValue=10}"/>
+
+        <Image Name="infoIcon"
+               Source="{StaticResource InfoIcon}"
+               Width="{x:Bind App.InfoIconSize, Mode=TwoWay, FallbackValue=55}"
+               Tapped="showInfoBox"
+               VerticalAlignment="Bottom"
+               HorizontalAlignment="Left"
+               Margin="{x:Bind App.ProductInfoIconMargin, Mode=TwoWay, FallbackValue=55}"/>
+
+        <MediaPlayerElement Name="video"
+                            Background="{StaticResource Orange}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Stretch="Fill"/>
+
+        <Image Name="questionCircle"
+                   Source="{StaticResource QuestionsCircle}"
+                   Width="{x:Bind App.QuestionsCircleDiameter, Mode=TwoWay, FallbackValue=450}"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
+
+        <!-- 365 vs 2016 comparison -->
+        <Grid Name="subscriptionVsOneTimeGrid"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center">
+            <StackPanel HorizontalAlignment="Left">
+                <TextBlock x:Uid="Office365CompareTitle"
+                       Text="Office 365"
+                       HorizontalAlignment="Left"
+                       Style="{StaticResource SemiBoldOrangeText}"
+                       FontSize="{x:Bind App.ProductCompareTitleFontSize, Mode=TwoWay, FallbackValue=30}"/>
+                <TextBlock x:Uid="Office365CompareDetails"
+                       Text="Office 365 details"
+                       HorizontalAlignment="Left"
+                       Style="{StaticResource InfoBoxText}"
+                       FontSize="{x:Bind App.ProductCompareDetailFontSize, Mode=TwoWay, FallbackValue=20}"/>
+                <TextBlock Text=""
+                       HorizontalAlignment="Left"
+                       FontSize="{x:Bind App.ProductCompareDetailFontSize, Mode=TwoWay, FallbackValue=20}"/>
+                <TextBlock x:Uid="Office2016CompareTitle"
+                       Text="Office 2016"
+                       HorizontalAlignment="Left"
+                       Style="{StaticResource SemiBoldOrangeText}"
+                       FontSize="{x:Bind App.ProductCompareTitleFontSize, Mode=TwoWay, FallbackValue=30}"/>
+                <TextBlock x:Uid="Office2016CompareDetails"
+                       Text="Office 2016 details"
+                       HorizontalAlignment="Left"
+                       Style="{StaticResource InfoBoxText}"
+                       FontSize="{x:Bind App.ProductCompareDetailFontSize, Mode=TwoWay, FallbackValue=20}"/>
+            </StackPanel>
+        </Grid>
+        
+        <!-- Center grid -->
+        <Grid Name="centerGrid"
+              Height="{x:Bind App.ProductCircleSize, Mode=TwoWay, FallbackValue=400}"
+              Width="{x:Bind App.ProductCircleSize, Mode=TwoWay, FallbackValue=400}"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center"
+              RenderTransformOrigin="0.5,0.5" 
+              PointerPressed="cgPressed"                          
+              PointerReleased="cgReleased"
+              PointerMoved="cgMoved">
+            <Grid.Background>
+                <ImageBrush Stretch="Fill" ImageSource="Assets/main_answer_1.png"/>
+            </Grid.Background>
+            <Grid Width="Auto" Height="Auto"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Name="productHeader"
+                               Style="{StaticResource WhiteForeground}"
+                               FontSize="{x:Bind App.ProductOverNameFontSize, Mode=TwoWay, FallbackValue=18}"
+                               Text="Here's a look at..."
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Name="productTitle"
+                               Style="{StaticResource SemiBoldWhiteText}"
+                               FontSize="{x:Bind App.ProductNameFontSize, Mode=TwoWay, FallbackValue=25}"
+                               x:Uid="ProductOverTitle"
+                               Text="Office Home and Bussiness"
+                               TextWrapping="Wrap"
+                               HorizontalAlignment="Center"/>
+                    <Image Name="productImage"
+                           Source="Assets/Products/office_POSA3_$!1_1.png"
+                           Width="{x:Bind App.ProductLargeImageSize, Mode=TwoWay, FallbackValue=200}"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <!-- Products stack panel -->
+        <StackPanel Name="productsPanel"
+                    HorizontalAlignment="Right"
+                    Width="{x:Bind App.ProductStackPanelWidth, Mode=TwoWay, FallbackValue=200}"
+                    Margin="{x:Bind App.ProductStackPanelMargin, Mode=TwoWay}">
+            <TextBlock x:Uid="ProductsTitle"
+                       Text="Discover other products..."
+                       Style="{StaticResource SemiBoldOrangeText}"
+                       FontSize="{x:Bind App.ProductFontSize, Mode=TwoWay, FallbackValue=30}"/>
+            <Grid Height="{x:Bind App.P10, Mode=TwoWay, FallbackValue=10}"></Grid>
+            <StackPanel Orientation="Horizontal">
+                <Image Name="pImg1"
+                       Source="{StaticResource Product1}"
+                       Width="{x:Bind App.ProductImageSize, Mode=TwoWay, FallbackValue=100}"
+                       Tag="0"
+                       Tapped="pImg_Tapped"/>
+                <Image Name="pImg2"
+                       Source="{StaticResource Product2}"
+                       Width="{x:Bind App.ProductImageSize, Mode=TwoWay, FallbackValue=100}"
+                       Tag="1"
+                       Tapped="pImg_Tapped"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Image Name="pImg3"
+                       Source="{StaticResource Product3}"
+                       Width="{x:Bind App.ProductImageSize, Mode=TwoWay, FallbackValue=100}"
+                       Tag="2"
+                       Tapped="pImg_Tapped"/>
+                <Image Name="pImg4"
+                       Source="{StaticResource Product4}"
+                       Width="{x:Bind App.ProductImageSize, Mode=TwoWay, FallbackValue=100}"
+                       Tag="3"
+                       Tapped="pImg_Tapped"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Image Name="pImg5"
+                       Source="{StaticResource Product5}"
+                       Width="{x:Bind App.ProductImageSize, Mode=TwoWay, FallbackValue=100}"
+                       Tag="4"
+                       Tapped="pImg_Tapped"/>
+                <Image Name="pImg6"
+                       Source="{StaticResource Product6}"
+                       Width="{x:Bind App.ProductImageSize, Mode=TwoWay, FallbackValue=100}"
+                       Tag="5"
+                       Tapped="pImg_Tapped"/>
+            </StackPanel>
+            <local:OrangeButton x:Uid="ProductsCompareAll"
+                                VerticalAlignment="Top"
+                                Tapped="showComparisonGrid"
+                                Margin="{x:Bind App.ProductStackPanelButtonsMargin, Mode=TwoWay, FallbackValue=0}"/>
+            <local:OrangeButton x:Uid="ProductsNewFeatures"
+                                VerticalAlignment="Top"
+                                Tapped="showNewFeatures"
+                                Margin="{x:Bind App.ProductStackPanelButtonsMargin, Mode=TwoWay, FallbackValue=0}"/>
+        </StackPanel>
+
+        <!-- Infobox -->
+        <local:InfoBox x:Name="infoBox"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Width="{x:Bind App.ProductInfoBoxWidth, Mode=TwoWay, FallbackValue=200}"
+                       Height="{x:Bind App.ProductInfoBoxHeight, Mode=TwoWay, FallbackValue=200}"
+                       Tapped="hideInfoBox" Loaded="infoBox_Loaded"/>
+
+        <!-- Features details -->
+        <Grid Name="featuresDetails"
+              Width="Auto"
+              Height="Auto"
+              Background="{StaticResource White}"
+              Visibility="Collapsed">
+
+            <!-- Show less -->
+            <local:BackButton x:Name="festuresShowLess"
+                          x:Uid="ShowLessButton"
+                          Margin="{x:Bind App.FeaturesBackButtonMargin, Mode=TwoWay, FallbackValue=10}"
+                          VerticalAlignment="Top"
+                          HorizontalAlignment="Left"
+                          Background="{StaticResource White}"
+                          ImageRotation="-90"
+                          Tapped="hideFeaturesDetails"/>
+
+            <!-- Close icon -->
+            <Image Name="closeFeaturesImage"
+                   Source="{StaticResource CloseIcon}"
+                   Height="{x:Bind App.BackIconSize, Mode=TwoWay, FallbackValue=10}"
+                   Margin="{x:Bind App.FeaturesBackButtonMargin, Mode=TwoWay, FallbackValue=20}"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Right"
+                   Opacity="0.5"
+                   Tapped="hideFeaturesDetails"/>
+
+            <!-- Grid -->
+            <Grid Name="featuresInfoGrid"
+                  Width="Auto"
+                  Height="Auto"
+                  Margin="{x:Bind App.FeaturesGridMargin, Mode=TwoWay, FallbackValue=20}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.13*"/>
+                    <ColumnDefinition Width="10*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="0.15*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="0.5*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Top grid -->
+                <Grid Grid.Column="1" Grid.Row="0"
+                      VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <!-- Row 0 - titles -->
+                    <Grid Grid.Column="0" Grid.Row="0">
+                        <TextBlock Text="Devices"
+                                   x:Uid="AssetsSectionDevices"
+                                   Style="{StaticResource FeaturesSectionTitle}"
+                                   FontSize="{x:Bind App.OrangeButtonFontSize, Mode=TwoWay, FallbackValue=20}"/>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="0">
+                        <TextBlock Text="Services"
+                                   x:Uid="AssetsSectionServices"
+                                   Style="{StaticResource FeaturesSectionTitle}"
+                                   FontSize="{x:Bind App.OrangeButtonFontSize, Mode=TwoWay, FallbackValue=20}"/>
+                    </Grid>
+                    <!-- Column 0 -->
+                    <Grid Grid.Column="0" Grid.Row="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.2*"/>
+                                <ColumnDefinition Width="5.5*"/>
+                                <ColumnDefinition Width="4.5*"/>
+                                <ColumnDefinition Width="0.4*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="2*"/>
+                            </Grid.RowDefinitions>
+                            <!-- Devices -->
+                            <Grid Grid.Column="1" Grid.Row="0">
+                                <Image Name="dummyDevice"
+                                       VerticalAlignment="Bottom"
+                                       HorizontalAlignment="Left"
+                                       Source="{StaticResource AssetDevice}"
+                                       Height="{x:Bind App.AssetDummySizeDevice, Mode=TwoWay, FallbackValue=100}"/>
+                                <Image Name="dummyUsers"
+                                       VerticalAlignment="Top"
+                                       HorizontalAlignment="Left"
+                                       Source="{StaticResource AssetUser}"
+                                       Height="{x:Bind App.AssetDummySizeUser, Mode=TwoWay, FallbackValue=50}"/>
+                            </Grid>
+                            <!-- Info -->
+                            <Grid Grid.Column="2" Grid.Row="0"
+                                  VerticalAlignment="Center"
+                                  Name="productInfoGrid">
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Name="featuresProductTitle"
+                                               Text="Product title"
+                                               Style="{StaticResource SemiBoldOrangeText}"
+                                               FontSize="{x:Bind App.ProductFontSize, Mode=TwoWay, FallbackValue=20}"/>
+                                    <TextBlock Name="featuresProductDescription"
+                                               Text="Product description"
+                                               Style="{StaticResource InfoBoxText}"
+                                               FontSize="{x:Bind App.AssetDetailsFontSize, Mode=TwoWay, FallbackValue=20}"/>
+                                </StackPanel>
+                            </Grid>
+                            <!-- Button -->
+                            <Grid Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2">
+                                <local:OrangeButton 
+                                    x:Name="learnMore365Button"
+                                    x:Uid="LearnMoreAboutOffice365Button"
+                                    Text="Learn more about Office 365 features"
+                                    VerticalAlignment="Bottom"
+                                    Tapped="showNewFeatures"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <!-- Column 1 -->
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <Grid VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Column="0" Grid.Row="0">
+                                <Image Name="aDummy8"
+                                       Source="{StaticResource Asset1}"
+                                       Margin="{x:Bind App.AssetDummyMargin, Mode=TwoWay, FallbackValue=10}"
+                                       Width="{x:Bind App.AssetDummySize, Mode=TwoWay, FallbackValue=100}"/>
+                            </Grid>
+                            <Grid Grid.Column="1" Grid.Row="0">
+                                <TextBlock Style="{StaticResource InfoBoxText}"
+                                           Text="Test...."
+                                           x:Uid="AssetsDescription8"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           FontSize="{x:Bind App.AssetDetailsFontSize, Mode=TwoWay, FallbackValue=20}"/>
+                            </Grid>
+                            <Grid Grid.Column="0" Grid.Row="1">
+                                <Image Name="aDummy10"
+                                       Source="{StaticResource Asset1}"
+                                       Margin="{x:Bind App.AssetDummyMargin, Mode=TwoWay, FallbackValue=10}"
+                                       Width="{x:Bind App.AssetDummySize, Mode=TwoWay, FallbackValue=100}"/>
+                            </Grid>
+                            <Grid Grid.Column="1" Grid.Row="1">
+                                <TextBlock Style="{StaticResource InfoBoxText}"
+                                           Text="Test...."
+                                           x:Uid="AssetsDescription9"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           FontSize="{x:Bind App.AssetDetailsFontSize, Mode=TwoWay, FallbackValue=20}"/>
+                            </Grid>
+                            <Grid Grid.Column="0" Grid.Row="2">
+                                <Image Name="aDummy9"
+                                       Source="{StaticResource Asset1}"
+                                       Margin="{x:Bind App.AssetDummyMargin, Mode=TwoWay, FallbackValue=10}"
+                                       Width="{x:Bind App.AssetDummySize, Mode=TwoWay, FallbackValue=100}"/>
+                            </Grid>
+                            <Grid Grid.Column="1" Grid.Row="2">
+                                <TextBlock Style="{StaticResource InfoBoxText}"
+                                           Text="Test...."
+                                           x:Uid="AssetsDescription10"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           FontSize="{x:Bind App.AssetDetailsFontSize, Mode=TwoWay, FallbackValue=20}"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    
+                </Grid>
+
+                <!-- Bottom grid -->
+                <Grid Grid.Column="1" Grid.Row="2"
+                      VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <!-- Row 0 - title -->
+                    <Grid Grid.Column="0" Grid.Row="0">
+                        <TextBlock Text="Applications"
+                                   x:Uid="AssetsSectionApplications"
+                                   Style="{StaticResource FeaturesSectionTitle}"
+                                   Margin="{x:Bind App.AssetsSectionMargin, Mode=TwoWay, FallbackValue=10}"
+                                   FontSize="{x:Bind App.OrangeButtonFontSize, Mode=TwoWay, FallbackValue=20}"/>
+                    </Grid>
+                    <!-- Column 0 -->
+                    <Grid Grid.Column="0" Grid.Row="1">
+                        <Grid VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Column="0" Grid.Row="0">
+                                <Image Name="aDummy1"
+                                       Source="{StaticResource Asset1}"
+                                       Margin="{x:Bind App.AssetDummyMargin, Mode=TwoWay, FallbackValue=10}"
+                                       Width="{x:Bind App.AssetDummySize, Mode=TwoWay, FallbackValue=100}"/>
+                            </Grid>
+                            <Grid Grid.Column="1" Grid.Row="0">
+                                <TextBlock Style="{StaticResource InfoBoxText}"
+                                           Text="Test...."
+                                           x:Uid="AssetsDescription1"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           FontSize="{x:Bind App.AssetDetailsFontSize, Mode=TwoWay, FallbackValue=20}"/>
+                            </Grid>
+                            <Grid Grid.Column="0" Grid.Row="1">
+                                <Image Name="aDummy2"
+                                       Source="{StaticResource Asset1}"
+                                       Margin="{x:Bind App.AssetDummyMargin, Mode=TwoWay, FallbackValue=10}"
+                                       Width="{x:Bind App.AssetDummySize, Mode=TwoWay, FallbackValue=100}"/>
+                            </Grid>
+                            <Grid Grid.Column="1" Grid.Row="1">
+                                <TextBlock Style="{StaticResource InfoBoxText}"
+                                           Text="Test...."
+                                           x:Uid="AssetsDescription2"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           FontSize="{x:Bind App.AssetDetailsFontSize, Mode=TwoWay, FallbackValue=20}"/>
+                            </Grid>
+                            <Grid Grid.Column="0" Grid.Row="2">
+                                <Image Name="aDummy3"
+                                       Source="{StaticResource Asset1}"
+                                       Margin="{x:Bind App.AssetDummyMargin, Mode=TwoWay, FallbackValue=10}"
+                                       Width="{x:Bind App.AssetDummySize, Mode=TwoWay, FallbackValue=100}"/>
+                            </Grid>
+                            <Grid Grid.Column="1" Grid.Row="2">
+                                <TextBlock Style="{StaticResource InfoBoxText}"
+                                           Text="Test...."
+                                           x:Uid="AssetsDescription3"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           FontSize="{x:Bind App.AssetDetailsFontSize, Mode=TwoWay, FallbackValue=20}"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <!-- Column 1 -->
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <Grid VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Column="0" Grid.Row="0">
+                                <Image Name="aDummy4"
+                                       Source="{StaticResource Asset1}"
+                                       Margin="{x:Bind App.AssetDummyMargin2, Mode=TwoWay, FallbackValue=10}"
+                                       Width="{x:Bind App.AssetDummySize, Mode=TwoWay, FallbackValue=100}"/>
+                            </Grid>
+                            <Grid Grid.Column="1" Grid.Row="0">
+                                <TextBlock Style="{StaticResource InfoBoxText}"
+                                           Text="Test...."
+                                           x:Uid="AssetsDescription4"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           FontSize="{x:Bind App.AssetDetailsFontSize, Mode=TwoWay, FallbackValue=20}"/>
+                            </Grid>
+                            <Grid Grid.Column="0" Grid.Row="1">
+                                <Image Name="aDummy5"
+                                       Source="{StaticResource Asset1}"
+                                       Margin="{x:Bind App.AssetDummyMargin2, Mode=TwoWay, FallbackValue=10}"
+                                       Width="{x:Bind App.AssetDummySize, Mode=TwoWay, FallbackValue=100}"/>
+                            </Grid>
+                            <Grid Grid.Column="1" Grid.Row="1">
+                                <TextBlock Style="{StaticResource InfoBoxText}"
+                                           Text="Test...."
+                                           x:Uid="AssetsDescription5"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           FontSize="{x:Bind App.AssetDetailsFontSize, Mode=TwoWay, FallbackValue=20}"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <!-- Column 2 -->
+                    <Grid Grid.Column="2" Grid.Row="1">
+                        <Grid VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Column="0" Grid.Row="0">
+                                <Image Name="aDummy7"
+                                       Source="{StaticResource Asset1}"
+                                       Margin="{x:Bind App.AssetDummyMargin2, Mode=TwoWay, FallbackValue=10}"
+                                       Width="{x:Bind App.AssetDummySize, Mode=TwoWay, FallbackValue=100}"/>
+                            </Grid>
+                            <Grid Grid.Column="1" Grid.Row="0">
+                                <TextBlock Style="{StaticResource InfoBoxText}"
+                                           Text="Test...."
+                                           x:Uid="AssetsDescription6"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           FontSize="{x:Bind App.AssetDetailsFontSize, Mode=TwoWay, FallbackValue=20}"/>
+                            </Grid>
+                            <Grid Grid.Column="0" Grid.Row="1">
+                                <Image Name="aDummy6"
+                                       Source="{StaticResource Asset1}"
+                                       Margin="{x:Bind App.AssetDummyMargin2, Mode=TwoWay, FallbackValue=10}"
+                                       Width="{x:Bind App.AssetDummySize, Mode=TwoWay, FallbackValue=100}"/>
+                            </Grid>
+                            <Grid Grid.Column="1" Grid.Row="1">
+                                <TextBlock Style="{StaticResource InfoBoxText}"
+                                           Text="Test...."
+                                           x:Uid="AssetsDescription7"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           FontSize="{x:Bind App.AssetDetailsFontSize, Mode=TwoWay, FallbackValue=20}"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+        </Grid>
+
+        <!-- Asset details -->
+        <Grid Name="assetDetails"
+              Width="Auto"
+              Height="Auto"
+              Background="{StaticResource White}"
+              Visibility="Collapsed"
+              RenderTransformOrigin="0.5,0.5">
+
+            <!-- Show less -->
+            <local:BackButton x:Name="showLessButton"
+                          x:Uid="ShowLessButton"
+                          Margin="{x:Bind App.QuestionsPadding, Mode=TwoWay, FallbackValue=50}"
+                          VerticalAlignment="Top"
+                          HorizontalAlignment="Left"
+                          ImageRotation="-90"
+                          Tapped="hideAssetDetails"/>
+        </Grid>
+
+        <!-- Assets images -->
+        <Grid Name="assetsGrid"
+              VerticalAlignment="Bottom"
+              HorizontalAlignment="Left"
+              Tapped="showAssetDetails">
+
+            <Image Name="aDevice"
+                   Source="{StaticResource AssetDevice}"
+                   Height="50"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Left"
+                   RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <CompositeTransform TranslateX="150" TranslateY="-50"/>
+                </Image.RenderTransform>
+            </Image>
+            <TextBlock Name="aDeviceText"
+                       Text="1 PC"
+                       Style="{StaticResource InfoBoxText}"
+                       FontSize="{x:Bind App.FeatureUserDeviceFontSize, Mode=TwoWay, FallbackValue=10}"
+                       HorizontalAlignment="Left"
+                       RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <CompositeTransform TranslateX="150" TranslateY="-50"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <Image Name="aUsers" Source="{StaticResource AssetUser}"
+                   Height="50"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Left"
+                   RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <CompositeTransform TranslateX="100" TranslateY="-50"/>
+                </Image.RenderTransform>
+            </Image>
+            <TextBlock Name="aUsersText"
+                       Text="1 User"
+                       Style="{StaticResource InfoBoxText}"
+                       FontSize="{x:Bind App.FeatureUserDeviceFontSize, Mode=TwoWay, FallbackValue=10}"
+                       HorizontalAlignment="Left"
+                       RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <CompositeTransform TranslateX="100" TranslateY="-50"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <Image Name="aImg1" Source="{StaticResource Asset1}"
+                   Height="50"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Left"
+                   RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <CompositeTransform TranslateX="200" TranslateY="-50"/>
+                </Image.RenderTransform>
+            </Image>
+            <Image Name="aImg2" Source="{StaticResource Asset2}"
+                   Height="50"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Left"
+                   RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <CompositeTransform TranslateX="250" TranslateY="-50"/>
+                </Image.RenderTransform>
+            </Image>
+            <Image Name="aImg3" Source="{StaticResource Asset3}"
+                   Height="50"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Left"
+                   RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <CompositeTransform TranslateX="300" TranslateY="-50"/>
+                </Image.RenderTransform>
+            </Image>
+            <Image Name="aImg4" Source="{StaticResource Asset4}"
+                   Height="50"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Left"
+                   RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <CompositeTransform TranslateX="350" TranslateY="-50"/>
+                </Image.RenderTransform>
+            </Image>
+            <Image Name="aImg5" Source="{StaticResource Asset5}"
+                   Height="50"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Left"
+                   RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <CompositeTransform TranslateX="400" TranslateY="-50"/>
+                </Image.RenderTransform>
+            </Image>
+            <Image Name="aImg6" Source="{StaticResource Asset6}"
+                   Height="50"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Left"
+                   RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <CompositeTransform TranslateX="450" TranslateY="-50"/>
+                </Image.RenderTransform>
+            </Image>
+            <Image Name="aImg7" Source="{StaticResource Asset7}"
+                   Height="50"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Left"
+                   RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <CompositeTransform TranslateX="500" TranslateY="-50"/>
+                </Image.RenderTransform>
+            </Image>
+            <Image Name="aImg8" Source="{StaticResource Asset8}"
+                   Height="50"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Left"
+                   RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <CompositeTransform TranslateX="550" TranslateY="-50"/>
+                </Image.RenderTransform>
+            </Image>
+            <Image Name="aImg9" Source="{StaticResource Asset9}"
+                   Height="50"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Left"
+                   RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <CompositeTransform TranslateX="600" TranslateY="-50"/>
+                </Image.RenderTransform>
+            </Image>
+            <Image Name="aImg10" Source="{StaticResource Asset10}"
+                   Height="50"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Left"
+                   RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <CompositeTransform TranslateX="650" TranslateY="-50"/>
+                </Image.RenderTransform>
+            </Image>
+        </Grid>
+
+        <!-- Comparison -->
+        <Grid Name="comparisonGrid"
+              Width="Auto"
+              Height="Auto"
+              Background="{StaticResource White}"
+              Visibility="Collapsed"
+              RenderTransformOrigin="0.5,0.5">
+
+            <!-- Show less -->
+            <local:BackButton x:Name="comparisonBackButton"
+                          x:Uid="BackButton"
+                          Margin="{x:Bind App.BackButtonMargin, Mode=TwoWay, FallbackValue=50}"
+                          VerticalAlignment="Top"
+                          HorizontalAlignment="Left"
+                          Tapped="hideComparisonGrid"/>
+
+            <!-- Compare Home and Personal -->
+            <Grid Name="comparisonGridHP"
+                  Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="8*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Column="1" Grid.Row="1"
+                      Name="compare1left">
+                    <Image Source="{StaticResource Product1}"/>
+                </Grid>
+                <Grid Grid.Column="2" Grid.Row="1"
+                      Name="compare1right">
+                    <Image Source="{StaticResource Product2}"/>
+                </Grid>
+            </Grid>
+
+            <!-- Compare 365 and 2016 -->
+            <Grid Name="comparisonGrid365_2016"
+                  Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="3"
+                      Name="compare2left1">
+                    <Image Source="{StaticResource Product1}"/>
+                </Grid>
+                <Grid Grid.Column="2" Grid.Row="1" Grid.RowSpan="3"
+                      Name="compare2rleft2">
+                    <Image Source="{StaticResource Product2}"/>
+                </Grid>
+                <Grid Grid.Column="4" Grid.Row="1"
+                      Name="compare2right1">
+                    <Image Source="{StaticResource Product3}"/>
+                </Grid>
+                <Grid Grid.Column="5" Grid.Row="1"
+                      Name="compare2right2">
+                    <Image Source="{StaticResource Product5}"/>
+                </Grid>
+                <Grid Grid.Column="4" Grid.Row="3"
+                      Name="compare2right3">
+                    <Image Source="{StaticResource Product4}"/>
+                </Grid>
+                <Grid Grid.Column="5" Grid.Row="3"
+                      Name="compare2right4">
+                    <Image Source="{StaticResource Product6}"/>
+                </Grid>
+            </Grid>
+
+            <!-- Chart -->
+            <Grid Name="comparisonChart"
+                  Width="Auto"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center"
+                  Visibility="Visible">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.0*"/>
+                    <ColumnDefinition Width="1.39873417721519*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1.0*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="0.3*"/>
+                    <RowDefinition Height="8*"/>
+                    <RowDefinition Height="1.5*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Title -->
+                <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="8">
+                    <TextBlock Name="comparisonTitle"
+                       Style="{StaticResource OrangeText}"
+                       FontSize="{x:Bind App.LargeFontSize, Mode=TwoWay, FallbackValue=50}"
+                       x:Uid="ComparisonChartTitle"
+                       Text="Comparison Chart"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Center"/>
+                </Grid>
+
+                <!-- Spacing -->
+                <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="8">
+                    <TextBlock
+                       FontSize="{x:Bind App.InfoBoxFontSize, Mode=TwoWay, FallbackValue=50}"
+                       Text=" "/>
+                </Grid>
+
+                <!-- All product comparison -->
+                <Grid Grid.Column="1" Grid.Row="2" Grid.RowSpan="1" Grid.ColumnSpan="7">
+                    <Image Source="{StaticResource ComparisonAll}"/>
+                </Grid>
+
+                <!-- Pruducts -->
+                <Grid Grid.Column="1" Grid.Row="2">
+                    <!-- <Image Source="{StaticResource ComparisonFeatures}"/> -->
+                </Grid>
+                <Grid Name="comparisonGrid0"
+                      Grid.Column="2" Grid.Row="2">
+                    <Grid Name="comparisonBorderGrid"
+                          BorderThickness="{x:Bind App.OrangeButtonBorder, Mode=TwoWay, FallbackValue=5}"
+                          BorderBrush="{StaticResource Orange}">
+                    </Grid>
+                </Grid>
+                <Grid Name="comparisonGrid1" Grid.Column="3" Grid.Row="2"></Grid>
+                <Grid Name="comparisonGrid2" Grid.Column="4" Grid.Row="2"></Grid>
+                <Grid Name="comparisonGrid3" Grid.Column="5" Grid.Row="2"></Grid>
+                <Grid Name="comparisonGrid4" Grid.Column="6" Grid.Row="2"></Grid>
+                <Grid Name="comparisonGrid5" Grid.Column="7" Grid.Row="2"></Grid>
+
+                <!-- Compare buttons -->
+                <Grid Grid.Column="2" Grid.Row="8" Grid.ColumnSpan="3">
+                    <local:OrangeButton
+                        x:Uid="Comparison365HomeAndPersonal"
+                        Visibility="Collapsed"
+                        VerticalAlignment="Top"
+                        Margin="{x:Bind App.ProductStackPanelMargin, Mode=TwoWay, FallbackValue=15}"
+                        Tapped="compareHomeAndPersonal"/>
+                </Grid>
+                <Grid Grid.Column="5" Grid.Row="8" Grid.ColumnSpan="3">
+                    <local:OrangeButton
+                        Visibility="Collapsed"
+                        x:Uid="Comparison365And2016"
+                        VerticalAlignment="Top"
+                        Margin="{x:Bind App.ProductStackPanelMargin, Mode=TwoWay, FallbackValue=15}"
+                        Tapped="compare365And2016"/>
+                </Grid>
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+</Page>

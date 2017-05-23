@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{60218351-D311-4841-AB22-7A0793FA2C60}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OPS</RootNamespace>
+    <AssemblyName>OPS</AssemblyName>
+    <DefaultLanguage>cs-CZ</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PackageCertificateKeyFile>UWP Demo_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86</AppxBundlePlatforms>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BackButton.xaml.cs">
+      <DependentUpon>BackButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InfoBox.xaml.cs">
+      <DependentUpon>InfoBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProductPage.xaml.cs">
+      <DependentUpon>ProductPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OrangeButton.xaml.cs">
+      <DependentUpon>OrangeButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="QuestionsIntro.xaml.cs">
+      <DependentUpon>QuestionsIntro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Questions.xaml.cs">
+      <DependentUpon>Questions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Storyboards.cs" />
+    <Compile Include="WhatsNew.xaml.cs">
+      <DependentUpon>WhatsNew.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <PRIResource Include="Strings\en-US\Resources.resw" />
+    <PRIResource Include="Strings\fr-CA\Resources.resw" />
+    <PRIResource Include="Strings\fr-FR\Resources.resw" />
+    <PRIResource Include="Strings\cs-CZ\Resources.resw" />
+    <None Include="UWP Demo_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Assets\ops_assets_access.png" />
+    <Content Include="Assets\Assets\ops_assets_access_gs.png" />
+    <Content Include="Assets\Assets\ops_assets_cloudstorage_app.png" />
+    <Content Include="Assets\Assets\ops_assets_cloudstorage_app_gs.png" />
+    <Content Include="Assets\Assets\ops_assets_excel.png" />
+    <Content Include="Assets\Assets\ops_assets_excel_gs.png" />
+    <Content Include="Assets\Assets\ops_assets_onenote.png" />
+    <Content Include="Assets\Assets\ops_assets_onenote_gs.png" />
+    <Content Include="Assets\Assets\ops_assets_outlook.png" />
+    <Content Include="Assets\Assets\ops_assets_outlook_gs.png" />
+    <Content Include="Assets\Assets\ops_assets_ppt.png" />
+    <Content Include="Assets\Assets\ops_assets_ppt_gs.png" />
+    <Content Include="Assets\Assets\ops_assets_pub.png" />
+    <Content Include="Assets\Assets\ops_assets_pub_gs.png" />
+    <Content Include="Assets\Assets\ops_assets_skype_app.png" />
+    <Content Include="Assets\Assets\ops_assets_skype_app_gs.png" />
+    <Content Include="Assets\Assets\ops_assets_uptodate_app.png" />
+    <Content Include="Assets\Assets\ops_assets_uptodate_app_gs.png" />
+    <Content Include="Assets\Assets\ops_assets_word.png" />
+    <Content Include="Assets\Assets\ops_assets_word_gs.png" />
+    <Content Include="Assets\Assets\ops_asset_device.png" />
+    <Content Include="Assets\Assets\ops_asset_family_5.png" />
+    <Content Include="Assets\Assets\ops_asset_user.png" />
+    <Content Include="Assets\begin_copycontain.png" />
+    <Content Include="Assets\Comparison\comparison_2016_HB_Mac.png" />
+    <Content Include="Assets\Comparison\comparison_2016_HB_PC.png" />
+    <Content Include="Assets\Comparison\comparison_2016_HS_Mac.png" />
+    <Content Include="Assets\Comparison\comparison_2016_HS_PC.png" />
+    <Content Include="Assets\Comparison\comparison_365_home.png" />
+    <Content Include="Assets\Comparison\comparison_365_personal.png" />
+    <Content Include="Assets\Comparison\comparison_all.png" />
+    <Content Include="Assets\Comparison\comparison_features.png" />
+    <Content Include="Assets\Devices\office_product_selector_devices_home_v04.gif" />
+    <Content Include="Assets\Devices\office_product_selector_devices_personal_v04.gif" />
+    <Content Include="Assets\Features\cs-CZ\ops_feature_excel_tell_me.png" />
+    <Content Include="Assets\Features\cs-CZ\ops_feature_ink_editor.png" />
+    <Content Include="Assets\Features\cs-CZ\ops_feature_ink_replay.png" />
+    <Content Include="Assets\Features\cs-CZ\ops_feature_ink_to_math.png" />
+    <Content Include="Assets\Features\cs-CZ\ops_feature_ppt_designer.png" />
+    <Content Include="Assets\Features\cs-CZ\ops_feature_ppt_morph.png" />
+    <Content Include="Assets\Features\cs-CZ\ops_feature_sway.png" />
+    <Content Include="Assets\Features\cs-CZ\ops_feature_word_researcher.png" />
+    <Content Include="Assets\Features\en-US\ops_feature_excel_tell_me.png" />
+    <Content Include="Assets\Features\en-US\ops_feature_ink_editor.png" />
+    <Content Include="Assets\Features\en-US\ops_feature_ink_replay.png" />
+    <Content Include="Assets\Features\en-US\ops_feature_ink_to_math.png" />
+    <Content Include="Assets\Features\en-US\ops_feature_ppt_designer.png" />
+    <Content Include="Assets\Features\en-US\ops_feature_ppt_morph.png" />
+    <Content Include="Assets\Features\en-US\ops_feature_sway.png" />
+    <Content Include="Assets\Features\en-US\ops_feature_word_researcher.png" />
+    <Content Include="Assets\Features\fr-CA\ops_feature_excel_tell_me.png" />
+    <Content Include="Assets\Features\fr-CA\ops_feature_ink_editor.png" />
+    <Content Include="Assets\Features\fr-CA\ops_feature_ink_replay.png" />
+    <Content Include="Assets\Features\fr-CA\ops_feature_ink_to_math.png" />
+    <Content Include="Assets\Features\fr-CA\ops_feature_ppt_designer.png" />
+    <Content Include="Assets\Features\fr-CA\ops_feature_ppt_morph.png" />
+    <Content Include="Assets\Features\fr-CA\ops_feature_sway.png" />
+    <Content Include="Assets\Features\fr-CA\ops_feature_word_researcher.png" />
+    <Content Include="Assets\Features\fr-FR\ops_feature_excel_tell_me.png" />
+    <Content Include="Assets\Features\fr-FR\ops_feature_ink_editor.png" />
+    <Content Include="Assets\Features\fr-FR\ops_feature_ink_replay.png" />
+    <Content Include="Assets\Features\fr-FR\ops_feature_ink_to_math.png" />
+    <Content Include="Assets\Features\fr-FR\ops_feature_ppt_designer.png" />
+    <Content Include="Assets\Features\fr-FR\ops_feature_ppt_morph.png" />
+    <Content Include="Assets\Features\fr-FR\ops_feature_sway.png" />
+    <Content Include="Assets\Features\fr-FR\ops_feature_word_researcher.png" />
+    <Content Include="Assets\Information Button-01.png" />
+    <Content Include="Assets\main_answer_1.png" />
+    <Content Include="Assets\main_question.png" />
+    <Content Include="Assets\main_question_outer.png" />
+    <Content Include="Assets\office_365_text.png" />
+    <Content Include="Assets\office_logo_burnt-08.png" />
+    <Content Include="Assets\ops_asset_arow_white.png" />
+    <Content Include="Assets\ops_asset_arrow_orange.png" />
+    <Content Include="Assets\ops_asset_back_arrow.png" />
+    <Content Include="Assets\ops_asset_back_arrow_white.png" />
+    <Content Include="Assets\PointingFinger_left.png" />
+    <Content Include="Assets\Products\office_POSA1_%24!1_1.png" />
+    <Content Include="Assets\Products\office_POSA2_%24!1_1.png" />
+    <Content Include="Assets\Products\office_POSA3_%24!1_1.png" />
+    <Content Include="Assets\Products\office_POSA4_%24!1_1.png" />
+    <Content Include="Assets\Products\office_POSA5_%24!1_1.png" />
+    <Content Include="Assets\Products\Office_POSA_%24!1_1.png" />
+    <Content Include="Assets\track_line.png" />
+    <Content Include="Assets\track_orb.png" />
+    <Content Include="Assets\Gray X.png" />
+    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Videos\cs-CZ\circle_flip.mp4" />
+    <Content Include="Videos\cs-CZ\FY18_BTS_FEA_Designer_Subtitles.mp4" />
+    <Content Include="Videos\cs-CZ\FY18_BTS_FEA_InkEditor_Subtitles.mp4" />
+    <Content Include="Videos\cs-CZ\FY18_BTS_FEA_InkReplay_Subtitles.mp4" />
+    <Content Include="Videos\cs-CZ\FY18_BTS_FEA_Morph_Subtitles.mp4" />
+    <Content Include="Videos\cs-CZ\FY18_BTS_FEA_Quickstarter_Subtitles.mp4" />
+    <Content Include="Videos\cs-CZ\FY18_BTS_FEA_Researcher_Subtitles.mp4" />
+    <Content Include="Videos\en-US\circle_flip.mp4" />
+    <Content Include="Videos\en-US\FY18_BTS_FEA_Designer_Subtitles.mp4" />
+    <Content Include="Videos\en-US\FY18_BTS_FEA_InkEditor_Subtitles.mp4" />
+    <Content Include="Videos\en-US\FY18_BTS_FEA_InkReplay_Subtitles.mp4" />
+    <Content Include="Videos\en-US\FY18_BTS_FEA_Morph_Subtitles.mp4" />
+    <Content Include="Videos\en-US\FY18_BTS_FEA_Quickstarter_Subtitles.mp4" />
+    <Content Include="Videos\en-US\FY18_BTS_FEA_Researcher_Subtitles.mp4" />
+    <Content Include="Videos\fr-CA\circle_flip.mp4" />
+    <Content Include="Videos\fr-CA\FY18_BTS_FEA_Designer_Subtitles.mp4" />
+    <Content Include="Videos\fr-CA\FY18_BTS_FEA_InkEditor_Subtitles.mp4" />
+    <Content Include="Videos\fr-CA\FY18_BTS_FEA_InkReplay_Subtitles.mp4" />
+    <Content Include="Videos\fr-CA\FY18_BTS_FEA_Morph_Subtitles.mp4" />
+    <Content Include="Videos\fr-CA\FY18_BTS_FEA_Quickstarter_Subtitles.mp4" />
+    <Content Include="Videos\fr-CA\FY18_BTS_FEA_Researcher_Subtitles.mp4" />
+    <Content Include="Videos\fr-FR\circle_flip.mp4" />
+    <Content Include="Videos\fr-FR\FY18_BTS_FEA_Designer_Subtitles.mp4" />
+    <Content Include="Videos\fr-FR\FY18_BTS_FEA_InkEditor_Subtitles.mp4" />
+    <Content Include="Videos\fr-FR\FY18_BTS_FEA_InkReplay_Subtitles.mp4" />
+    <Content Include="Videos\fr-FR\FY18_BTS_FEA_Morph_Subtitles.mp4" />
+    <Content Include="Videos\fr-FR\FY18_BTS_FEA_Quickstarter_Subtitles.mp4" />
+    <Content Include="Videos\fr-FR\FY18_BTS_FEA_Researcher_Subtitles.mp4" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="BackButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InfoBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProductPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HomePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="OrangeButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="QuestionsIntro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Questions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WhatsNew.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

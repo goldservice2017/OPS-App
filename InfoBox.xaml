@@ -1,0 +1,40 @@
+﻿<UserControl
+    x:Class="OPS.InfoBox"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OPS"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid x:Name="infoBox">
+        <Border BorderBrush="{StaticResource InfoBoxBackgroundColor}"
+                Background="{StaticResource InfoBoxBackgroundColor}"
+                Padding="{x:Bind App.InfoBoxPadding, Mode=TwoWay, FallbackValue=40}"
+                CornerRadius="{x:Bind App.InfoBoxCornerRadius, Mode=TwoWay}">
+            <Grid>
+                <!-- Close icon -->
+                <Image x:Name="image"
+                               Source="{StaticResource CloseIcon}"
+                               Width="{x:Bind App.InfoBoxCloseIconSize, Mode=TwoWay, FallbackValue=20}"
+                               Margin="{x:Bind App.InfoBoxCloseIconMargin, Mode=TwoWay}"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Top"
+                               Opacity="0.5"/>
+                <StackPanel>
+                    <!-- Title -->
+                    <TextBlock Name="title" Text="Why does this matter?"                               
+                               Style="{StaticResource SemiBoldOrangeText}"
+                               FontSize="{x:Bind App.InfoBoxTitleFontSize, Mode=TwoWay, FallbackValue=28}"/>
+                    <!-- Description -->
+                    <TextBlock Name="description"                            
+                            Text="Some info..." TextWrapping="Wrap"
+                            Style="{StaticResource InfoBoxText}"
+                            FontSize="{x:Bind App.InfoBoxFontSize, Mode=TwoWay, FallbackValue=16}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

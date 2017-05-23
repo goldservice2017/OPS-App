@@ -1,0 +1,68 @@
+﻿<Page
+    x:Class="OPS.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OPS"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Width="1437.667" Height="778.667" RenderTransformOrigin="0.5,0.5"
+    Background="{StaticResource White}">
+
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition/>
+        </TransitionCollection>
+    </Page.Transitions>
+
+    <Grid x:Name="grid" Background="{StaticResource White}" Height="Auto" Width="Auto">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="FirstGrid" Grid.Column="0" Grid.Row="0"
+              Style="{StaticResource WhiteBackground}"
+              Padding="{x:Bind App.HomePadding, Mode=TwoWay, FallbackValue=50}"
+              Tapped="IDontKnowPage">
+            <Image x:Name="officeImage"
+                   HorizontalAlignment="Left"
+                   Height="{x:Bind App.HomeOfficeSize, Mode=TwoWay, FallbackValue=100}"
+                   VerticalAlignment="Bottom"
+                   Source="{StaticResource HomeOfficeLogo}"
+                   Stretch="Uniform"
+                   Margin="{x:Bind App.HomeOfficeMargin, Mode=TwoWay, FallbackValue=42}"/>
+            <TextBlock x:Uid="HomePageDontKnow"
+                       Style="{StaticResource SemiBoldOrangeText}"
+                       FontSize="{x:Bind App.WhatsNewFontSize, Mode=TwoWay, FallbackValue=42}"
+                       HorizontalAlignment="Left"
+                       Text="I dont know..."
+                       VerticalAlignment="Top"/>
+            <Image x:Name="arrow1"
+                   HorizontalAlignment="Left"
+                   Height="{x:Bind App.HomeArrowSize, Mode=TwoWay, FallbackValue=100}"
+                   VerticalAlignment="Center" Width="{x:Bind App.HomeArrowSize, Mode=TwoWay}"
+                   Source="{StaticResource OrangeArrow}"
+                   Margin="{x:Bind App.HomeArrowSizeMargin, Mode=TwoWay}"
+                   RenderTransformOrigin="0.5,0.5"/>
+        </Grid>
+
+        <Grid x:Name="SecondGrid" Grid.Column="1" Grid.Row="0"
+              Style="{StaticResource OrangeBackground}"
+              Padding="{x:Bind App.HomePadding, Mode=TwoWay, FallbackValue=50}"
+              Tapped="IKnowPage">
+            <TextBlock x:Uid="HomePageKnow"
+                       Style="{StaticResource SemiBoldWhiteText}"
+                       FontSize="{x:Bind App.WhatsNewFontSize, Mode=TwoWay, FallbackValue=42}"
+                       HorizontalAlignment="Left"
+                       Text="I know..."
+                       VerticalAlignment="Top"/>
+            <Image x:Name="arrow2"
+                   HorizontalAlignment="Left"
+                   Height="{x:Bind App.HomeArrowSize, Mode=TwoWay, FallbackValue=100}"
+                   VerticalAlignment="Center" Width="{x:Bind App.HomeArrowSize, Mode=TwoWay}"
+                   Source="{StaticResource WhiteArrow}" Margin="{x:Bind App.HomeArrowSizeMargin, Mode=TwoWay}"/>
+        </Grid>
+
+    </Grid>
+</Page>

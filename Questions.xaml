@@ -1,0 +1,88 @@
+﻿<Page x:Name="page3"
+    x:Class="OPS.Questions"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OPS"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Width="897.307"
+    Background="{StaticResource White}">
+
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition/>
+        </TransitionCollection>
+    </Page.Transitions>
+
+    <Grid Name="rootGrid"
+          Background="{StaticResource White}"
+          Padding="{x:Bind App.QuestionsPadding, Mode=TwoWay, FallbackValue=50}">
+
+        <!-- Back button -->
+        <local:BackButton x:Name="backButton" x:Uid="BackButton" Tapped="back_Tapped"/>
+
+        <!-- Info image -->
+        <Image x:Name="infoImage"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Margin="{x:Bind App.InfoIconMargin, Mode=TwoWay, FallbackValue=0}"
+                Width="{x:Bind App.InfoIconSize, Mode=TwoWay, FallbackValue=77}"
+                Source="{StaticResource InfoIcon}"
+                Tapped="infoImage_Tapped"/>
+
+        <!-- Answers placeholder -->
+        <Grid x:Name="answersGrid" HorizontalAlignment="Center" VerticalAlignment="Center"></Grid>
+
+        <!-- Question -->
+        <Grid x:Name="questionTextGrid" HorizontalAlignment="Center" VerticalAlignment="Center"
+            Width="{x:Bind App.QuestionsOuterCircleDiameter, Mode=TwoWay, FallbackValue=500}"
+            Height="{x:Bind App.QuestionsOuterCircleDiameter, Mode=TwoWay, FallbackValue=500}">
+            <Image Name="questionOuterCircle"
+                   Source="{StaticResource QuestionsOuterCircle}"
+                   Width="{x:Bind App.QuestionsOuterCircleDiameter, Mode=TwoWay, FallbackValue=500}"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
+            <Image Name="questionCircle"
+                   Source="{StaticResource QuestionsCircle}"
+                   Width="{x:Bind App.QuestionsCircleDiameter, Mode=TwoWay, FallbackValue=450}"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="8*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1" Grid.Row="1">
+                    <TextBlock Name="questionTextBlock" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                Style="{StaticResource OrangeText}"
+                FontSize="{x:Bind App.QuestionsFontSize, Mode=TwoWay, FallbackValue=38}"
+                Text="Question" TextWrapping="Wrap" TextAlignment="Center"/>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <!-- Orb image -->
+        <Image x:Name="dotImage"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Height="{x:Bind App.QuestionsDotDiameter, Mode=TwoWay, FallbackValue=70}"
+               Width="{x:Bind App.QuestionsDotDiameter, Mode=TwoWay, FallbackValue=70}"
+               Source="{StaticResource QuestionsTrackOrb}" Stretch="Fill"/>
+
+        <!-- Info Box -->
+        <local:InfoBox x:Name="infoBox"
+                       Visibility="Collapsed"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Left"
+                       Margin="{x:Bind App.InfoIconMargin, Mode=TwoWay, FallbackValue=0}"
+                       Width="{x:Bind App.QuestionsInfoBoxWidth, Mode=TwoWay, FallbackValue=400}"
+                       Tapped="infoBox_Tapped"/>
+    </Grid>
+
+</Page>
